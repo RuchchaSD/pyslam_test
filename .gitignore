@@ -16,7 +16,7 @@ kitti
 map.json
 config.pyc 
 thirdparty/g2opy
-thirdparty/pangolin
+thirdparty/pangolin*
 thirdparty/opencv-python
 thirdparty/opencv
 thirdparty/open3d
