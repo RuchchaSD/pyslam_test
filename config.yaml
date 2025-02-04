@@ -49,16 +49,16 @@ LIB_PATHS:
   raft_stereo: thirdparty/raft_stereo, thirdparty/raft_stereo/core
   crestereo: thirdparty/crestereo
   crestereo_pytorch: thirdparty/crestereo_pytorch 
-  gaussian_splatting: thirdparty/monogs
+  #crestereo_onnx: thirdparty/crestereo_onnx
 
 
 DATASET:
   # select your dataset (decomment only one of the following lines) 
-  #type: EUROC_DATASET  
+  type: EUROC_DATASET  
   #type: KITTI_DATASET
   #type: TUM_DATASET
   #type: REPLICA_DATASET
-  type: VIDEO_DATASET
+  #type: VIDEO_DATASET
   #type: FOLDER_DATASET
   #type: LIVE_DATASET  # Not recommended for current development stage
 
@@ -71,8 +71,8 @@ KITTI_DATASET:
   # name: '06'
   # settings: settings/KITTI04-12.yaml # do not forget to correctly set the corresponding camera settings file 
   #
-  # name: '00'
-  # settings: settings/KITTI00-02.yaml # do not forget to correctly set the corresponding camera settings file 
+  name: '00'
+  settings: settings/KITTI00-02.yaml # do not forget to correctly set the corresponding camera settings file 
   #
   is_color: True # do you have the color images for the kitti dataset? (image2 and image3 folders)
   groundtruth_file: auto
@@ -89,11 +89,8 @@ TUM_DATASET:
   #name: rgbd_dataset_freiburg1_xyz 
   #settings: settings/TUM1.yaml # do not forget to correctly set the corresponding camera settings file
   #
-  name: rgbd_dataset_freiburg2_desk
-  settings: settings/TUM2.yaml # do not forget to correctly set the corresponding camera settings file
-  #
-  #name: rgbd_dataset_freiburg1_room  # do not use this for mono, there are some in-place rotations during exploratory phases
-  #settings: settings/TUM1.yaml # do not forget to set the corresponding camera settings file 
+  name: rgbd_dataset_freiburg1_room  # do not use this for mono, there are some in-place rotations during exploratory phases
+  settings: settings/TUM1.yaml # do not forget to set the corresponding camera settings file 
   #
   associations: associations.txt
   groundtruth_file: auto
@@ -101,15 +98,23 @@ TUM_DATASET:
 
 EUROC_DATASET:
   type: euroc
-  sensor_type: stereo # Here, sensor_type can be 'mono' or 'stereo'
-  base_path: /home/luigi/Work/datasets/rgbd_datasets/euroc
-  #name: MH01
+  sensor_type: mono # Here, sensor_type can be 'mono' or 'stereo'
+  base_path: /mnt/sda1/FYP_2024/Euroc/extracted
+  # Newly Added lines:-
+  multiple_datasets: True
+  dataset_names: [V103, V203, MH04, MH05]
+
+  name: MH01
   #name: MH02  
   #name: MH03    
   #name: V101  
-  name: V102
+  #name: V102
   #name: V202
-  #name: V203   
+  #available ones
+  # name: MH04
+  #name: MH05
+  # name: V103
+  #name: V203
   # 'settings' will be used when sensor_type: : 'mono'
   settings: settings/EuRoC_mono.yaml
   # 'settings_stereo' will be used when sensor_type: 'stereo' (if available)
@@ -123,7 +128,7 @@ REPLICA_DATASET:
   type: replica
   sensor_type: rgbd # Here, 'sensor_type' can be 'mono' or 'rgbd'
   base_path: /home/luigi/Work/datasets/rgbd_datasets/replica
-  name: 'office0'
+  name: 'room2'
   settings: settings/REPLICA.yaml # do not forget to correctly set the corresponding camera settings file
   groundtruth_file: auto
 
@@ -132,9 +137,9 @@ VIDEO_DATASET:
   type: video
   sensor_type: mono   # Here, 'sensor_type' can be only 'mono' 
   #
-  # base_path: ./data/videos/kitti00
-  # settings: settings/KITTI00-02.yaml
-  # name: video.mp4
+  #base_path: ./data/videos/kitti00
+  #settings: settings/KITTI00-02.yaml
+  #name: video.mp4
   #
   base_path: ./data/videos/kitti06
   settings: settings/KITTI04-12.yaml
@@ -160,15 +165,15 @@ FOLDER_DATASET:
 
 
 SYSTEM_STATE: 
-  # This section is used for saving and reloading the system state: Sparse map + Loop closing state  
-  load_state: False                # flag to enable SLAM state reloading (map state + loop closing state) and relocalization
-  folder_path: results/slam_state  # default folder path (relative to root of this repository) where the system state is saved or reloaded
+  # This section is used for saving and re-loading the system state: Map + Loop closing state  
+  load_state: False              # flag to enable SLAM state reloading (map state + loop closing state) and relocalization
+  folder_path: data/slam_state   # folder path relative to root of this repository
  
 
 SAVE_TRAJECTORY:
   save_trajectory: True
-  format_type: kitti    # supported formats: `tum`, `kitti`, `euroc`
-  filename: results/kitti_trajectory.txt
+  format_type: tum    # supported formats: `tum`, `kitti`, `euroc`
+  filename: kitti_trajectory.txt
 
 
 # DO NOT USE [LIVE_DATASET]! This section is here for future developments. 

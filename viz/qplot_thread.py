@@ -45,8 +45,8 @@ kDebugAndPrintToFile = True
 
 kScriptPath = os.path.realpath(__file__)
 kScriptFolder = os.path.dirname(kScriptPath)
-kRootFolder = kScriptFolder + '/..'
-kLogsFolder = kRootFolder + '/logs'
+kRootFolder = kScriptFolder
+kLogsFolder = kRootFolder + '/../logs'
 
 
 if kVerbose and kDebugAndPrintToFile:
@@ -95,7 +95,7 @@ class SharedSingletonLock:
 # Qplot2d class for dynamic 2D plotting using pyqtgraph
 # NOTE: This is a good tutorial https://www.pythonguis.com/tutorials/plotting-pyqtgraph/
 class Qplot2d:
-    def __init__(self, xlabel='', ylabel='', title=''):
+    def __init__(self, xlabel='', ylabel='', title='',output_dir = ''):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title 

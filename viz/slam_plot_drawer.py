@@ -33,6 +33,7 @@ from qplot_thread import Qplot2d
 import matplotlib.colors as mcolors
 
 from utils_geom import AlignmentEstimatedAndGroundTruthData, Sim3Pose
+import os
 
 kUseQtplot2d = False
 if platform.system() == 'Darwin':
@@ -47,7 +48,7 @@ def factory_plot2d(*args,**kwargs):
     
     
 class SlamPlotDrawer:
-    def __init__(self, slam: Slam, viewer3D: Viewer3D = None):
+    def __init__(self, slam: Slam, viewer3D: Viewer3D = None,output_dir = ''):
         self.slam = slam
         self.viewer3D = viewer3D
         
@@ -61,21 +62,21 @@ class SlamPlotDrawer:
         self.last_alignment_gt_data = AlignmentEstimatedAndGroundTruthData()
         
         # To disable one of them just comment it out
-        self.matched_points_plt = factory_plot2d(xlabel='img id', ylabel='# matches',title='# matches')  
-        #self.info_3dpoints_plt = factory_plot2d(xlabel='img id', ylabel='# points',title='info 3d points')      
-        self.chi2_error_plt = factory_plot2d(xlabel='img id', ylabel='error',title='mean chi2 error')
-        self.timing_plt = factory_plot2d(xlabel='img id', ylabel='s',title='timing')        
-        self.traj_error_plt = factory_plot2d(xlabel='time [s]', ylabel='error',title='trajectories: gt vs (aligned)estimated')
+        self.matched_points_plt = factory_plot2d(xlabel='img id', ylabel='# matches',title='# matches',output_dir=output_dir)  
+        #self.info_3dpoints_plt = factory_plot2d(xlabel='img id', ylabel='# points',title='info 3d points',output_dir=output_dir)      
+        self.chi2_error_plt = factory_plot2d(xlabel='img id', ylabel='error',title='mean chi2 error',output_dir=output_dir)
+        self.timing_plt = factory_plot2d(xlabel='img id', ylabel='s',title='timing',output_dir=output_dir)        
+        self.traj_error_plt = factory_plot2d(xlabel='time [s]', ylabel='error',title='trajectories: gt vs (aligned)estimated',output_dir=output_dir)
         
         
         self.plt_list = [self.matched_points_plt, self.info_3dpoints_plt, self.chi2_error_plt, self.timing_plt, self.traj_error_plt]
         
         self.last_processed_kf_img_id = -1
         
-    def quit(self):
+    def quit(self, out_dir = ''):
         for plt in self.plt_list:
             if plt is not None:
-                plt.quit()        
+                plt.quit(out_dir)        
             
     def get_key(self):
         for plt in self.plt_list:
@@ -237,4 +238,18 @@ class SlamPlotDrawer:
             Printer.red(f'SlamPlotDrawer: draw: encountered exception: {e}')
             traceback_details = traceback.format_exc()
             print(f'\t traceback details: {traceback_details}')
-    
+
+
+    def save_plots(self, dir_name=''):
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
+            
+        try:    
+            for plt in self.plt_list:
+                if plt is not None:
+                    plt.save_plot(dir_name)
+                    
+        except Exception as e:
+            Printer.red(f'SlamPlotDrawer: save_plots: encountered exception: {e}')
+            traceback_details = traceback.format_exc()
+            print(f'\t traceback details: {traceback_details}')

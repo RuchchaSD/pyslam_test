@@ -48,7 +48,8 @@ class Config(object):
         #print(f'root folder: {self.root_folder}, config file path: {self.config_file_path}')
         self.config = yaml.load(open(self.config_file_path, 'r'), Loader=yaml.FullLoader)
         self.cam_settings = None
-        self.system_settings = None
+        self.cam_stereo_settings = None
+        self.feature_manager_settings = None
         self.dataset_settings = None
         self.dataset_type = None
         self.sensor_type = None
@@ -64,7 +65,8 @@ class Config(object):
         self.read_lib_paths()
         
         self.get_dataset_settings()
-        self.get_general_system_settings()        
+        self.get_cam_settings()
+        self.get_feature_manager_settings()
         self.get_system_state_settings()
         self.get_trajectory_settings()
 
@@ -101,25 +103,49 @@ class Config(object):
         self.dataset_type = self.config['DATASET']['type']
         self.dataset_settings = self.config[self.dataset_type]
         self.sensor_type = self.dataset_settings['sensor_type'].lower()
+        # self.dataset_path = self.dataset_settings['base_path']
+        # self.dataset_settings['base_path'] = os.path.join( __location__, self.dataset_path)
+            # If "multiple_datasets" is provided in the YAML, read it; otherwise default to False
+        self.dataset_settings['multiple_datasets'] = self.dataset_settings.get('multiple_datasets', False)
+        if self.dataset_settings['multiple_datasets']:
+            # We expect a list of dataset_names
+            self.dataset_settings['dataset_names'] = self.dataset_settings.get('dataset_names', [])
+        else:
+            # Single dataset name
+            self.dataset_settings['dataset_names'] = [ self.dataset_settings.get('name', 'MH04') ]
+        
+        # base path
         self.dataset_path = self.dataset_settings['base_path']
-        self.dataset_settings['base_path'] = os.path.join( __location__, self.dataset_path)
+        self.dataset_settings['base_path'] = os.path.join(__location__, self.dataset_path)
+
         #print('dataset_settings: ', self.dataset_settings)
-                    
-    # get general system settings
-    def get_general_system_settings(self):
-        self.system_settings = None
-        self.general_settings_filepath = __location__ + '/' + self.config[self.dataset_type]['settings']
-        if self.sensor_type == 'stereo' and 'settings_stereo' in self.config[self.dataset_type]:
-            self.general_settings_filepath = __location__ + '/' + self.config[self.dataset_type]['settings_stereo']
-            Printer.orange('Using stereo settings file: ' + self.general_settings_filepath)
-            print('------------------------------------')          
-        if(self.general_settings_filepath is not None):
-            with open(self.general_settings_filepath, 'r') as stream:
+
+    # get camera settings
+    def get_cam_settings(self):
+        self.cam_settings = None
+        self.cam_settings_filepath = __location__ + '/' + self.config[self.dataset_type]['settings']
+        if self.sensor_type == 'stereo':
+            if 'settings_stereo' in self.config[self.dataset_type]:
+                self.cam_settings_filepath = __location__ + '/' + self.config[self.dataset_type]['settings_stereo']
+                Printer.orange('Using stereo settings file: ' + self.cam_settings_filepath)
+                print('------------------------------------')            
+        if(self.cam_settings_filepath is not None):
+            with open(self.cam_settings_filepath, 'r') as stream:
                 try:
-                    self.system_settings = yaml.load(stream, Loader=yaml.FullLoader)
+                    self.cam_settings = yaml.load(stream, Loader=yaml.FullLoader)
                 except yaml.YAMLError as exc:
                     print(exc)
-        self.cam_settings = self.system_settings                                                    
+                    
+    # get feature manager settings
+    def get_feature_manager_settings(self):
+        self.feature_manager_settings = None
+        self.feature_manager_settings_filepath = __location__ + '/' + self.config[self.dataset_type]['settings']
+        if(self.feature_manager_settings_filepath is not None):
+            with open(self.feature_manager_settings_filepath, 'r') as stream:
+                try:
+                    self.feature_manager_settings = yaml.load(stream, Loader=yaml.FullLoader)
+                except yaml.YAMLError as exc:
+                    print(exc)                    
 
     def get_system_state_settings(self):
         self.system_state_settings = self.config['SYSTEM_STATE']
@@ -231,42 +257,17 @@ class Config(object):
     @property
     def num_features_to_extract(self):
         if not hasattr(self, '_num_features_to_extract'):
-            if 'FeatureExtractor.nFeatures' in self.system_settings:
-                self._num_features_to_extract = self.system_settings['FeatureExtractor.nFeatures']
+            if 'FeatureExtractor.nFeatures' in self.feature_manager_settings:
+                self._num_features_to_extract = self.feature_manager_settings['FeatureExtractor.nFeatures']
             else:
                 self._num_features_to_extract = 0
         return self._num_features_to_extract    
 
-    @property 
-    def far_points_threshold(self):
-        if not hasattr(self, '_far_points_threshold'):
-            if 'Matching.farPointsThreshold' in self.system_settings:
-                self._far_points_threshold = self.system_settings['Matching.farPointsThreshold']
-            else:
-                self._far_points_threshold = None
-        return self._far_points_threshold
-    
-    @property
-    def use_fov_centers_based_kf_generation(self):
-        if not hasattr(self, '_use_fov_centers_based_kf_generation'):
-            self._use_fov_centers_based_kf_generation = False
-            if 'KeyFrame.useFovCentersBasedGeneration' in self.system_settings:
-                self._use_fov_centers_based_kf_generation = bool(self.system_settings['KeyFrame.useFovCentersBasedGeneration'])
-        return self._use_fov_centers_based_kf_generation
-    
-    @property
-    def max_fov_centers_distance(self):
-        if not hasattr(self, '_max_fov_centers_distance'):
-            self._max_fov_centers_distance = -1
-            if 'KeyFrame.maxFovCentersDistance' in self.system_settings:
-                self._max_fov_centers_distance = self.system_settings['KeyFrame.maxFovCentersDistance']
-        return self._max_fov_centers_distance
-    
     # stereo settings 
     @property
-    def cam_stereo_settings(self):
-        if not hasattr(self, '_cam_stereo_settings'):
-            self._cam_stereo_settings = None
+    def stereo_settings(self):
+        if not hasattr(self, '_stereo_settings'):
+            self._stereo_settings = None
             left, right = {}, {}
             if 'LEFT.D' in self.cam_settings:
                 left_D = self.cam_settings['LEFT.D']
@@ -303,9 +304,9 @@ class Config(object):
                 right['P'] = right_P         
                    
             if len(left) > 0 and len(right) > 0:
-                self._cam_stereo_settings = {'left':left, 'right':right}
-        #print(f'[config] stereo settings: {self._cam_stereo_settings}')
-        return self._cam_stereo_settings
+                self._stereo_settings = {'left':left, 'right':right}
+        #print(f'[config] stereo settings: {self._stereo_settings}')
+        return self._stereo_settings
 
    
 if __name__ != "__main__":

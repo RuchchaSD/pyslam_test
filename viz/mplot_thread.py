@@ -35,6 +35,7 @@ import logging
 import torch.multiprocessing as mp
 from utils_sys import Logging, locally_configure_qt_environment
 from utils_mp import MultiprocessingManager
+import pandas as pd
     
     
 kPlotSleep = 0.04
@@ -49,8 +50,8 @@ kUseFigCanvasDrawIdle = True
 
 kScriptPath = os.path.realpath(__file__)
 kScriptFolder = os.path.dirname(kScriptPath)
-kRootFolder = kScriptFolder + '/..'
-kLogsFolder = kRootFolder + '/logs'
+kRootFolder = kScriptFolder
+kLogsFolder = kRootFolder + '/../logs'
 
 
 if kVerbose and kDebugAndPrintToFile:
@@ -109,7 +110,7 @@ class SharedSingletonLock:
 
 # use mplotlib figure to draw in 2d dynamic data
 class Mplot2d:
-    def __init__(self, xlabel='', ylabel='', title=''):
+    def __init__(self, xlabel='', ylabel='', title='', output_dir=""):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title 
@@ -117,7 +118,13 @@ class Mplot2d:
         self.data = None 
         self.got_data = False 
         self.handle_map = {}
-        self.fig = None  
+        self.fig = None
+        self.out_dir = None
+        
+        if(output_dir is None):
+            output_dir = os.getcwd()
+        
+        self.out_dir = output_dir  
         
         self.axis_computed = False 
         self.xlim = [float("inf"),float("-inf")]
@@ -137,18 +144,22 @@ class Mplot2d:
         
         self.figure_num = mp.Value('i', int(FigureNum.getFigureNum()))
         print(f'Mplot2d: starting the process on figure: {self.figure_num.value}')
-        print(f'Mplot2d: backend {matplotlib.get_backend()}')
         
         self.lock = SharedSingletonLock().get_lock
         
         self.initialized = False  # New flag to track figure initialization
         
-        args = (self.figure_num,self.queue,self.lock,self.key,self.is_running,self.key_queue,)
+        args = (self.figure_num,self.queue,self.lock,self.key,self.is_running,self.key_queue,self.out_dir)
         self.process = mp.Process(target=self.run, args=args)
         #self.process.daemon = kSetDaemon  
         self.process.start()
 
-    def quit(self):
+    def quit(self,out_dir=None):
+        
+        if(out_dir is None):
+            out_dir = os.getcwd()
+        
+        self.out_dir = out_dir
         print(f'Mplot2d {self.title} closing...')
         self.is_running.value = 0
         self.process.join(timeout=5)     
@@ -174,17 +185,14 @@ class Mplot2d:
         if self.title != '':
             self.ax.set_title(self.title) 
         self.ax.set_xlabel(self.xlabel)
-        self.ax.set_ylabel(self.ylabel)	
-        if matplotlib.get_backend() == 'Qt5Agg':
-            self.ax.grid(visible=True, which='both', axis='both', color='gray', linestyle='-', linewidth=0.21)
-        else:
-            self.ax.grid()
+        self.ax.set_ylabel(self.ylabel)	   
+        self.ax.grid()		
         #Autoscale on unknown axis and known lims on the other
         self.ax.set_autoscaley_on(True)   
         lock.release()
         self.initialized = True  # Set the flag to True after initialization
         
-    def run(self, figure_num, queue, lock, key, is_running, key_queue):  
+    def run(self, figure_num, queue, lock, key, is_running, key_queue, dir_location):  
         if kVerbose:
             print(f'Mplot2d {self.title}: starting run on figure ', figure_num.value)
         self.key_queue_thread = key_queue        
@@ -196,8 +204,38 @@ class Mplot2d:
             if kUseFigCanvasDrawIdle:               
                 time.sleep(kPlotSleep) 
         empty_queue(queue)  # empty the queue before exiting 
-        print(mp.current_process().name,f' - Mplot2d {self.title}: closing fig {self.fig}')  
-        plt.close(self.fig)              
+        print(mp.current_process().name,f' - Mplot2d {self.title}: closing fig {self.fig}')
+        
+        if(self.fig is not None):
+            # Ensure the directory exists
+            os.makedirs(dir_location, exist_ok=True)
+            
+            # Save the plot as a PNG file
+            png_path = os.path.join(dir_location, f"{self.title}.png")
+            self.fig.savefig(png_path)
+            if kVerbose:
+                print(f"Plot saved as {png_path}")
+            
+            # Collect current data
+            try:
+                data_to_save = {}
+                for name, handle in self.handle_map.items():
+                    data_to_save[f'{name}_x'] = handle.get_xdata().tolist()
+                    data_to_save[f'{name}_y'] = handle.get_ydata().tolist()
+                
+                # Create a DataFrame and save as CSV
+                max_length = max(len(lst) for lst in data_to_save.values())
+                for key in data_to_save:
+                    if len(data_to_save[key]) < max_length:
+                        data_to_save[key] += [0] * (max_length - len(data_to_save[key]))
+                df = pd.DataFrame(data_to_save)
+                csv_path = os.path.join(dir_location, f"{self.title}.csv")
+                df.to_csv(csv_path, index=False)
+                if kVerbose:
+                    print(f"Data saved as {csv_path}")
+                plt.close(self.fig)
+            except Exception as e:
+                print(f"Failed to save data: {e}")
 
     def drawer_refresh(self, queue, lock):            
         while not queue.empty():      
@@ -295,6 +333,55 @@ class Mplot2d:
         if kUsePlotPause:
             plt.pause(kPlotSleep)
         lock.release()
+
+    def save_plot(self, dir_location=None):
+        
+        if dir_location is None:
+            dir_location = os.getcwd()
+            
+        self.out_dir = dir_location
+        
+        if not self.initialized:
+            print(f"{self.title}_plot_No data to save.")
+            return
+        # Ensure the directory exists
+        os.makedirs(dir_location, exist_ok=True)
+        
+        # Save the plot as a PNG file
+        png_path = os.path.join(dir_location, f"{self.title}.png")
+        self.fig.savefig(png_path)
+        if kVerbose:
+            print(f"Plot saved as {png_path}")
+        
+        # Collect current data
+        data_to_save = []
+        for line in self.data:
+            x, y = line['x'], line['y']
+            data_to_save.append({'x': x, 'y': y})
+        
+        # Create a DataFrame and save as CSV
+        df = pd.DataFrame(data_to_save)
+        csv_path = os.path.join(dir_location, f"{self.title}.csv")
+        df.to_csv(csv_path, index=False)
+        if kVerbose:
+            print(f"Data saved as {csv_path}")
+            # Collect current data for all plots
+        data_to_save = {}
+        for name, handle in self.handle_map.items():
+            data_to_save[f'{name}_x'] = handle.get_xdata()
+            data_to_save[f'{name}_y'] = handle.get_ydata()
+            
+            # Create a DataFrame and save as CSV
+        df = pd.DataFrame(data_to_save)
+        csv_path = os.path.join(dir_location, f"{self.title}.csv")
+        df.to_csv(csv_path, index=False)
+        if kVerbose:
+            print(f"Data saved as {csv_path}")
+
+
+
+
+
 
 
 # use mplotlib figure to draw in 3D trajectories 
