@@ -96,7 +96,7 @@ class GlobalPrinter(metaclass=SingletonMeta):
         # Close old logger if any
         if self._file_logger is not None and log_file_path != self._log_file_path:
             self._file_logger.close()
-            del self._file_logger
+            self._file_logger = None
 
         if log_file_path is None:
             _original_print("[GlobalPrinter] No log file path provided. printing to terminal only.")
