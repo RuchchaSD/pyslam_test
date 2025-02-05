@@ -24,7 +24,7 @@ import numpy as np
 from frame import Frame, FeatureTrackerShared, are_map_points_visible, are_map_points_visible_in_frame
 from keyframe import KeyFrame
 from map_point import predict_detection_levels
-
+from utils_sys import getchar, Printer 
 from utils_geom import computeF12, check_dist_epipolar_line, Sim3Pose
 from config_parameters import Parameters  
 from timer import Timer

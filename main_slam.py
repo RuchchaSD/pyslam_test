@@ -17,12 +17,11 @@
 * You should have received a copy of the GNU General Public License
 * along with PYSLAM. If not, see <http://www.gnu.org/licenses/>.
 """
-
+import matplotlib.pyplot as plt
 import cv2
 import time 
 import os
 import sys
-
 import platform 
 import evaluate
 
@@ -95,8 +94,8 @@ if __name__ == "__main__":
         #ORB2,ORB,XFEAT
     # WARNING: At present, SLAM does not support LOFTR and other "pure" image matchers (further details in the commenting notes about LOFTR in feature_tracker_configs.py).
     feature_configs_to_test = [
-        FeatureTrackerConfigs.XFEAT_XFEAT,
-        FeatureTrackerConfigs.FAST_ORB,
+        FeatureTrackerConfigs.SUPERPOINT,
+        FeatureTrackerConfigs.ORB2,
         FeatureTrackerConfigs.ORB,
         FeatureTrackerConfigs.ORB2_BEBLID
     ]
@@ -126,7 +125,7 @@ if __name__ == "__main__":
             for iteration_idx in range(num_iterations):
                   
                 Printer.yellow(f'--- Iteration {iteration_idx+1}/{num_iterations} ---')
-                time.sleep(4)
+                time.sleep(2)
 
                 # (a) Override the trajectory filename to reflect feature/dataset/iteration
                 #     e.g. logs/ORB2_BEBLID/MH04/0/trajectory.txt
@@ -178,7 +177,7 @@ if __name__ == "__main__":
                     Printer.green(f'Depth_estimator_type: {depth_estimator_type.name}, max_depth: {max_depth}')       
                 
                 # create SLAM object
-                slam = Slam(camera, feature_tracker_config, loop_detection_config, dataset.sensorType(), groundtruth=None, environment_type=dataset.environmentType()) # groundtruth not actually used by Slam class
+                slam = Slam(camera, feature_tracker_config, loop_detection_config, dataset.sensorType(), environment_type=dataset.environmentType()) # groundtruth not actually used by Slam class
                 slam.set_viewer_scale(dataset.scale_viewer_3d)
                 time.sleep(1) # to show initial messages 
     
@@ -353,8 +352,8 @@ if __name__ == "__main__":
                 for i in range(num_iterations):
                     ate_result = ate_results[i]
                     rpe_results = rpe_results[i]
-                    txt += f"{ate_result['compared_pose_pairs']},{ate_result["absolute_translational_error"]["rmse"]},{ate_result["absolute_translational_error"]["mean"]},{ate_result["absolute_translational_error"]["median"]},{ate_result["absolute_translational_error"]["std"]},{ate_result["absolute_translational_error"]["min"]},{ate_result["absolute_translational_error"]["max"]},"
-                    txt += f"{rpe_results['compared_pose_pairs']},{rpe_results["translational_error"]['rmse']},{rpe_results["translational_error"]['mean']},{rpe_results["translational_error"]['median']},{rpe_results["translational_error"]['std']},{rpe_results["translational_error"]['min']},{rpe_results["translational_error"]['max']},{rpe_results["rotational_error"]['rmse']},{rpe_results["rotational_error"]['mean']},{rpe_results["rotational_error"]['median']},{rpe_results["rotational_error"]['std']},{rpe_results["rotational_error"]['min']},{rpe_results["rotational_error"]['max']},\n"
+                    txt += f"{ate_result['compared_pose_pairs']},{ate_result['absolute_translational_error']['rmse']},{ate_result['absolute_translational_error']['mean']},{ate_result['absolute_translational_error']['median']},{ate_result['absolute_translational_error']['std']},{ate_result['absolute_translational_error']['min']},{ate_result['absolute_translational_error']['max']},"
+                    txt += f"{rpe_results['compared_pose_pairs']},{rpe_results['translational_error']['rmse']},{rpe_results['translational_error']['mean']},{rpe_results['translational_error']['median']},{rpe_results['translational_error']['std']},{rpe_results['translational_error']['min']},{rpe_results['translational_error']['max']},{rpe_results['rotational_error']['rmse']},{rpe_results['rotational_error']['mean']},{rpe_results['rotational_error']['median']},{rpe_results['rotational_error']['std']},{rpe_results['rotational_error']['min']},{rpe_results['rotational_error']['max']},\n"
                 
                 dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/"
                 
