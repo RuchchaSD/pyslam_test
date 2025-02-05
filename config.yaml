@@ -102,7 +102,7 @@ EUROC_DATASET:
   base_path: /mnt/sda1/FYP_2024/Euroc/extracted
   # Newly Added lines:-
   multiple_datasets: True
-  dataset_names: [MH01,V103, V203, MH04, MH05]
+  dataset_names: [MH01, MH02, MH03, MH04, MH05, V101, V102, V103, V201, MH202, MH203]
 
   name: MH01
   #name: MH02  

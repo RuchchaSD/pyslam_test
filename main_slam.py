@@ -57,6 +57,12 @@ from rerun_interface import Rerun
 
 import traceback
 
+from utilities.utils_print import GlobalPrinter
+time.sleep(1)
+GlobalPrinter.get_instance().set_log_file("logs/main.log")
+time.sleep(1)
+GlobalPrinter.get_instance().set_print_to_terminal(False)
+time.sleep(1)
 compare_gt = False
 
 def initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir,gt_file = None,traj_file = None):
@@ -84,7 +90,7 @@ if __name__ == "__main__":
     config = Config()
 
     # OPTIONAL: Define how many times we want to run each dataset-feature combo
-    num_iterations = 3  # >= 1
+    num_iterations = 5  # >= 1
 
     #Define the list of feature-tracker configs you want to test.
     # Select your tracker configuration (see the file feature_tracker_configs.py) 
@@ -94,13 +100,38 @@ if __name__ == "__main__":
         #ORB2,ORB,XFEAT
     # WARNING: At present, SLAM does not support LOFTR and other "pure" image matchers (further details in the commenting notes about LOFTR in feature_tracker_configs.py).
     feature_configs_to_test = [
-        FeatureTrackerConfigs.SUPERPOINT,
-        FeatureTrackerConfigs.ORB2,
         FeatureTrackerConfigs.ORB,
-        FeatureTrackerConfigs.ORB2_BEBLID
+        FeatureTrackerConfigs.ORB2,
+        FeatureTrackerConfigs.SHI_TOMASI_ORB,
+        FeatureTrackerConfigs.SHI_TOMASI_FREAK,
+        FeatureTrackerConfigs.FAST_ORB,
+        FeatureTrackerConfigs.FAST_FREAK,
+        FeatureTrackerConfigs.BRISK,
+        FeatureTrackerConfigs.KAZE,
+        FeatureTrackerConfigs.AKAZE,
+        FeatureTrackerConfigs.ROOT_SIFT,
+        FeatureTrackerConfigs.SUPERPOINT,
+        FeatureTrackerConfigs.XFEAT,
+        FeatureTrackerConfigs.XFEAT_XFEAT,
+        FeatureTrackerConfigs.DELF,
+        FeatureTrackerConfigs.D2NET,
+        FeatureTrackerConfigs.R2D2,
+        FeatureTrackerConfigs.LFNET,
+        FeatureTrackerConfigs.CONTEXTDESC,
+        FeatureTrackerConfigs.KEYNET,
+        FeatureTrackerConfigs.DISK,
+        FeatureTrackerConfigs.KEYNETAFFNETHARDNET,
+        FeatureTrackerConfigs.SIFT,
+        FeatureTrackerConfigs.ALIKED,
+        FeatureTrackerConfigs.DISK,
+        FeatureTrackerConfigs.LIGHTGLUE_ALIKED,
+        FeatureTrackerConfigs.LIGHTGLUESIFT,
+        FeatureTrackerConfigs.LIGHTGLUE_DISK,
+        # FeatureTrackerConfigs.LIGHTGLUESIFT,
+        FeatureTrackerConfigs.ORB2_BEBLID,
     ]
     
-    
+    print('Slam System Started')
 
     # 2) Now loop over each feature config
     for feature_tracker_config in feature_configs_to_test:
@@ -123,16 +154,19 @@ if __name__ == "__main__":
             
             #run multiple iterations for the same (dataset, feature) pair
             for iteration_idx in range(num_iterations):
-                  
-                Printer.yellow(f'--- Iteration {iteration_idx+1}/{num_iterations} ---')
-                time.sleep(2)
-
+                
                 # (a) Override the trajectory filename to reflect feature/dataset/iteration
                 #     e.g. logs/ORB2_BEBLID/MH04/0/trajectory.txt
                 # NOTE: We assume config.trajectory_settings is a dict with keys: 'filename', 'save_trajectory', 'format_type'
                 output_dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/{iteration_idx}"
                 os.makedirs(output_dir, exist_ok=True)
-
+                
+                # Set the log file for this iteration
+                GlobalPrinter.get_instance().set_log_file(f"{output_dir}/log.txt")
+                
+                Printer.yellow(f'--- Iteration {iteration_idx+1}/{num_iterations} ---')
+                time.sleep(2)
+                
                 # We build a full path for the trajectory file:
                 traj_name = f"{feature_tracker_config['detector_type']}_{dataset_name}_{iteration_idx}_trajectory.txt"
                 traj_file = os.path.join(output_dir, traj_name)

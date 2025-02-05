@@ -15,6 +15,7 @@ import sys
 import os
 import logging
 import threading
+import builtins
 from typing import Optional
 
 # Import the same FileLogger you shared. No modifications needed there.
@@ -31,12 +32,16 @@ class SingletonMeta(type):
     _instance = None
     _lock = threading.Lock()
 
-    def __call__(cls, *args, **kwargs):
-        if cls._instance is None:
-            with cls._lock:
-                if cls._instance is None:
-                    cls._instance = super().__call__(*args, **kwargs)
-        return cls._instance
+    def __call__(cls, print_to_terminal=None, log_file_path=None, *args, **kwargs):
+            if cls._instance is None:
+                with cls._lock:
+                    if cls._instance is None:
+                        cls._instance = super().__call__(print_to_terminal=print_to_terminal, *args, **kwargs)
+                if log_file_path is None and print_to_terminal is True:
+                    cls._instance._set_config(print_to_terminal, "printer_log.txt")
+                else:
+                    cls._instance._set_config(print_to_terminal, log_file_path)
+            return cls._instance
 
 def _resolve_conflicting_logfile(desired_path: str) -> str:
     """
@@ -53,7 +58,7 @@ def _resolve_conflicting_logfile(desired_path: str) -> str:
 
 
 # We'll store Python's original built-in print
-_original_print = print
+_original_print = builtins.print
 
 class GlobalPrinter(metaclass=SingletonMeta):
     """
@@ -65,11 +70,13 @@ class GlobalPrinter(metaclass=SingletonMeta):
       - Then call .print(...) or any python 'print(...)' call.
     """
 
-    def __init__(self, print_to_terminal: bool = True, log_file_path: str = "printer_log.txt"):
+    def __init__(self, print_to_terminal: bool = True):
         """Called only once."""
         self._print_to_terminal = print_to_terminal
         self._file_logger: Optional[FileLogger] = None
-        self._set_config(print_to_terminal, log_file_path)
+        self._log_file_path = None
+        self._print_to_terminal = True
+        # self._set_config(print_to_terminal, log_file_path)
 
     @classmethod
     def create(cls, print_to_terminal: bool, log_file_path: str):
@@ -81,15 +88,21 @@ class GlobalPrinter(metaclass=SingletonMeta):
         instance._set_config(print_to_terminal, log_file_path)
         return instance
 
-    def _set_config(self, print_to_terminal: bool, log_file_path: str):
+    def _set_config(self, print_to_terminal = None , log_file_path = None):
         """Reconfigure the logger at runtime."""
-        self._print_to_terminal = print_to_terminal
+        if type(print_to_terminal) == bool:
+            self._print_to_terminal = print_to_terminal
 
         # Close old logger if any
-        if self._file_logger is not None:
+        if self._file_logger is not None and log_file_path != self._log_file_path:
             self._file_logger.close()
             del self._file_logger
 
+        if log_file_path is None:
+            _original_print("[GlobalPrinter] No log file path provided. printing to terminal only.")
+            print_to_terminal = True
+            return
+        
         # Attempt to create a new logger
         safe_path = _resolve_conflicting_logfile(log_file_path)
         self._log_file_path = safe_path
@@ -165,7 +178,7 @@ def _global_print_override(*args, sep=" ", end="\n", file=None, flush=False, **k
     gp.print(*args, sep=sep, end=end, level=level)
 
 
-print = _global_print_override
+builtins.print = _global_print_override
 
 
 # A separate convenience function if you prefer gprint(...)
