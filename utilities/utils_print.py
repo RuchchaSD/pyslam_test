@@ -22,6 +22,7 @@ import torch.multiprocessing as mp
 
 import utils_sys
 from utils_sys import FileLogger
+import logging
 
 class SingletonMeta(type):
     """
@@ -185,7 +186,36 @@ if __name__ == "__main__":
     # Reconfigure with new file
     GlobalPrinter.create(print_to_terminal=False, log_file_path="main.log")
     print("Now this goes to main.log or main_1.log if main.log existed.")
+    print("Hello from the default constructor!","This is a test")
+    print("Info level test")
+    print("Debug level test", level=logging.DEBUG)
+    print("Warning level test", level=logging.WARNING)
+    print("Error level test", level=logging.ERROR)
+    print("Critical level test", level=logging.CRITICAL)
+    
 
     # Switch back to terminal
     GlobalPrinter.get_instance().set_print_to_terminal(True)
     print("Back to terminal!")
+    # Demonstration of various log levels
+    print("Info level test")
+    print("Debug level test", level=logging.DEBUG)
+    print("Warning level test", level=logging.WARNING)
+    print("Error level test", level=logging.ERROR)
+    print("Critical level test", level=logging.CRITICAL)
+
+    # Reconfigure to log only to file
+    GlobalPrinter.get_instance().set_log_file("test.log")
+    GlobalPrinter.get_instance().set_print_to_terminal(False)
+    print("Logging to file only now")
+    print("Logging to file only now","new line")
+    print("Logging to file only now","new line","allss",sep="*****")
+    print("Logging to file only now","new line",end="$$$$$$$$$\n")
+    
+
+    # Switch back to terminal printing
+    GlobalPrinter.get_instance().set_print_to_terminal(True)
+    print("Terminal printing restored")
+    print("Logging to file only now","new line")
+    print("Logging to file only now","new line","allss",sep="*****")
+    print("Logging to file only now","new line",end="$$$$$$$$$\n")
