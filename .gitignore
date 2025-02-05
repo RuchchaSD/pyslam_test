@@ -57,6 +57,7 @@ thirdparty/pydbow3/ORBvoc.txt
 thirdparty/protoc 
 
 logs/*.log
+logs/*
 
 .env
 .env.bak
