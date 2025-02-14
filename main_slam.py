@@ -100,12 +100,12 @@ if __name__ == "__main__":
         #ORB2,ORB,XFEAT
     # WARNING: At present, SLAM does not support LOFTR and other "pure" image matchers (further details in the commenting notes about LOFTR in feature_tracker_configs.py).
     feature_configs_to_test = [
-        FeatureTrackerConfigs.ORB,
-        FeatureTrackerConfigs.ORB2,
-        FeatureTrackerConfigs.SHI_TOMASI_ORB,
-        FeatureTrackerConfigs.SHI_TOMASI_FREAK,
+        # FeatureTrackerConfigs.ORB,
+        # FeatureTrackerConfigs.ORB2,
+        # FeatureTrackerConfigs.SHI_TOMASI_ORB,
+        # FeatureTrackerConfigs.SHI_TOMASI_FREAK, # this is not tested
         FeatureTrackerConfigs.FAST_ORB,
-        FeatureTrackerConfigs.FAST_FREAK,
+        # FeatureTrackerConfigs.FAST_FREAK, # this is not tested
         FeatureTrackerConfigs.BRISK,
         FeatureTrackerConfigs.KAZE,
         FeatureTrackerConfigs.AKAZE,
@@ -131,13 +131,27 @@ if __name__ == "__main__":
         FeatureTrackerConfigs.ORB2_BEBLID,
     ]
     
+    startfrom  = {
+        'ft_type': FeatureTrackerConfigs.FAST_ORB,
+        'dataset_name': 'V101',
+        'iteration_idx': 2
+    }
+    
     print('Slam System Started')
 
     # 2) Now loop over each feature config
     for feature_tracker_config in feature_configs_to_test:
+        
+        if feature_tracker_config != startfrom['ft_type']:
+            print(f'Skipping feature tracker config: {feature_tracker_config["detector_type"]}_{feature_tracker_config["descriptor_type"]}')
+            continue
 
         # 3) Loop over each dataset name if multiple_datasets == True, or just the single dataset name
         for dataset_name in config.dataset_settings['dataset_names']:
+            
+            if dataset_name != startfrom['dataset_name']:
+                print(f'Skipping dataset: {dataset_name}')
+                continue
 
             Printer.green(f'Running SLAM on dataset: {dataset_name} with feature config: {feature_tracker_config["detector_type"]}')
 
@@ -155,13 +169,18 @@ if __name__ == "__main__":
             #run multiple iterations for the same (dataset, feature) pair
             for iteration_idx in range(num_iterations):
                 
+                if iteration_idx < startfrom['iteration_idx']:
+                    print(f'Skipping iteration {iteration_idx}')
+                    continue
+                
                 # (a) Override the trajectory filename to reflect feature/dataset/iteration
                 #     e.g. logs/ORB2_BEBLID/MH04/0/trajectory.txt
                 # NOTE: We assume config.trajectory_settings is a dict with keys: 'filename', 'save_trajectory', 'format_type'
-                output_dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/{iteration_idx}"
+                output_dir = f"logs/{feature_tracker_config['detector_type']}_{feature_tracker_config['descriptor_type']}/{dataset_name}/{iteration_idx}"
                 os.makedirs(output_dir, exist_ok=True)
                 
                 # Set the log file for this iteration
+                GlobalPrinter.get_instance().set_print_to_terminal(False)
                 GlobalPrinter.get_instance().set_log_file(f"{output_dir}/log.txt")
                 
                 Printer.yellow(f'--- Iteration {iteration_idx+1}/{num_iterations} ---')
@@ -378,21 +397,24 @@ if __name__ == "__main__":
                 
                 #cv2.waitKey(0)
                 #cv2.destroyAllWindows()
+                GlobalPrinter.get_instance().set_print_to_terminal(True)
+
             
-            if compare_gt:
-                txt = "#_pair_ate,mean_ate,median_ate,std_ate,min_ate,max_ate,"
-                txt += "#_pairs_rpe_tran,rmse_rpe_tran,mean_rpe_tran,median_rpe_tran,std_rpe_tran,min_rpe_tran,max_rpe_tran,rmse_rpe_rot,mean_rpe_rot,median_rpe_rot,std_rpe_rot,min_rpe_rot,max_rpe_rot,\n"
+                        
+            # if compare_gt:
+            #     txt = "#_pair_ate,mean_ate,median_ate,std_ate,min_ate,max_ate,"
+            #     txt += "#_pairs_rpe_tran,rmse_rpe_tran,mean_rpe_tran,median_rpe_tran,std_rpe_tran,min_rpe_tran,max_rpe_tran,rmse_rpe_rot,mean_rpe_rot,median_rpe_rot,std_rpe_rot,min_rpe_rot,max_rpe_rot,\n"
                 
-                for i in range(num_iterations):
-                    ate_result = ate_results[i]
-                    rpe_results = rpe_results[i]
-                    txt += f"{ate_result['compared_pose_pairs']},{ate_result['absolute_translational_error']['rmse']},{ate_result['absolute_translational_error']['mean']},{ate_result['absolute_translational_error']['median']},{ate_result['absolute_translational_error']['std']},{ate_result['absolute_translational_error']['min']},{ate_result['absolute_translational_error']['max']},"
-                    txt += f"{rpe_results['compared_pose_pairs']},{rpe_results['translational_error']['rmse']},{rpe_results['translational_error']['mean']},{rpe_results['translational_error']['median']},{rpe_results['translational_error']['std']},{rpe_results['translational_error']['min']},{rpe_results['translational_error']['max']},{rpe_results['rotational_error']['rmse']},{rpe_results['rotational_error']['mean']},{rpe_results['rotational_error']['median']},{rpe_results['rotational_error']['std']},{rpe_results['rotational_error']['min']},{rpe_results['rotational_error']['max']},\n"
+            #     for i in range(num_iterations):
+            #         ate_result = ate_results[i]
+            #         rpe_results = rpe_results[i]
+            #         txt += f"{ate_result['compared_pose_pairs']},{ate_result['absolute_translational_error']['rmse']},{ate_result['absolute_translational_error']['mean']},{ate_result['absolute_translational_error']['median']},{ate_result['absolute_translational_error']['std']},{ate_result['absolute_translational_error']['min']},{ate_result['absolute_translational_error']['max']},"
+            #         txt += f"{rpe_results['compared_pose_pairs']},{rpe_results['translational_error']['rmse']},{rpe_results['translational_error']['mean']},{rpe_results['translational_error']['median']},{rpe_results['translational_error']['std']},{rpe_results['translational_error']['min']},{rpe_results['translational_error']['max']},{rpe_results['rotational_error']['rmse']},{rpe_results['rotational_error']['mean']},{rpe_results['rotational_error']['median']},{rpe_results['rotational_error']['std']},{rpe_results['rotational_error']['min']},{rpe_results['rotational_error']['max']},\n"
                 
-                dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/"
+            #     dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/"
                 
-                with open(f"{dir}/results.txt", "w") as f:
-                    f.write(txt)
+            #     with open(f"{dir}/results.txt", "w") as f:
+            #         f.write(txt)
                 
                 
                 
