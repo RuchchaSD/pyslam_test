@@ -103,9 +103,9 @@ if __name__ == "__main__":
         # FeatureTrackerConfigs.ORB,
         # FeatureTrackerConfigs.ORB2,
         # FeatureTrackerConfigs.SHI_TOMASI_ORB,
-        # FeatureTrackerConfigs.SHI_TOMASI_FREAK, # this is not tested
+        FeatureTrackerConfigs.SHI_TOMASI_FREAK, # this is not tested
         FeatureTrackerConfigs.FAST_ORB,
-        # FeatureTrackerConfigs.FAST_FREAK, # this is not tested
+        FeatureTrackerConfigs.FAST_FREAK, # this is not tested
         FeatureTrackerConfigs.BRISK,
         FeatureTrackerConfigs.KAZE,
         FeatureTrackerConfigs.AKAZE,
@@ -139,19 +139,29 @@ if __name__ == "__main__":
     
     print('Slam System Started')
 
+    # set up flags to skip over feature tracker configs, datasets, and iterations, 
+    # if false the loop will skip over that feature tracker config, dataset, or iteration until it reaches the startfrom values
+    Feat_tracker = False
+    _dataset = False
+    _iteration = False
+    
     # 2) Now loop over each feature config
     for feature_tracker_config in feature_configs_to_test:
         
-        if feature_tracker_config != startfrom['ft_type']:
+        if (feature_tracker_config != startfrom['ft_type']) and (not Feat_tracker):
             print(f'Skipping feature tracker config: {feature_tracker_config["detector_type"]}_{feature_tracker_config["descriptor_type"]}')
             continue
+        else:
+            Feat_tracker = True
 
         # 3) Loop over each dataset name if multiple_datasets == True, or just the single dataset name
         for dataset_name in config.dataset_settings['dataset_names']:
             
-            if dataset_name != startfrom['dataset_name']:
+            if (dataset_name != startfrom['dataset_name']) and (not _dataset):
                 print(f'Skipping dataset: {dataset_name}')
                 continue
+            else:
+                _dataset = True
 
             Printer.green(f'Running SLAM on dataset: {dataset_name} with feature config: {feature_tracker_config["detector_type"]}')
 
@@ -169,9 +179,11 @@ if __name__ == "__main__":
             #run multiple iterations for the same (dataset, feature) pair
             for iteration_idx in range(num_iterations):
                 
-                if iteration_idx < startfrom['iteration_idx']:
+                if (iteration_idx < startfrom['iteration_idx']) and (not _iteration):
                     print(f'Skipping iteration {iteration_idx}')
                     continue
+                else:
+                    _iteration = True
                 
                 # (a) Override the trajectory filename to reflect feature/dataset/iteration
                 #     e.g. logs/ORB2_BEBLID/MH04/0/trajectory.txt
