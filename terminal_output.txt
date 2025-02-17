@@ -1,0 +1,14 @@
+[33m WARNING: cannot import LightGlue from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import DiskFeature2D from feature_disk, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import ALIKED from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import SIFT from lightglue, check the file docs/TROUBLESHOOTING.md
+[0mcannot set lib:  gaussian_splatting
+[33m WARNING: cannot import VolumetricIntegratorGaussianSplatting from volumetric_integrator_gaussian_splatting, check the file docs/TROUBLESHOOTING.md
+[0mimporting pygame
+pygame 2.6.0 (SDL 2.28.4, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+initialising pygame
+[GlobalPrinter] No log file path provided. printing to terminal only.
+FileLogger[logs/main_2.log]: Log file reset.
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/0/log.txt]: Log file reset.

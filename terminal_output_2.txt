@@ -1,0 +1,218 @@
+[33m WARNING: cannot import LightGlue from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import DiskFeature2D from feature_disk, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import ALIKED from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import SIFT from lightglue, check the file docs/TROUBLESHOOTING.md
+[0mcannot set lib:  gaussian_splatting
+[33m WARNING: cannot import VolumetricIntegratorGaussianSplatting from volumetric_integrator_gaussian_splatting, check the file docs/TROUBLESHOOTING.md
+[0mimporting pygame
+pygame 2.6.0 (SDL 2.28.4, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+initialising pygame
+[GlobalPrinter] No log file path provided. printing to terminal only.
+FileLogger[logs/main_3.log]: Log file reset.
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/0/log_1.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001914796310332612, initial_mean_squared_error: 0.001989631565906928, num_edges: 222,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0007158064244787391, initial_mean_squared_error: 0.0007971984257129516, num_edges: 500,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010197907155409895, initial_mean_squared_error: 0.0013784173090961493, num_edges: 328,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002765898455207159, initial_mean_squared_error: 0.0032059868686531855, num_edges: 236,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0024411058439838397, initial_mean_squared_error: 0.0025783464027388033, num_edges: 278,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00040102180771314945, initial_mean_squared_error: 0.0012235403699436273, num_edges: 426,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0028350545799269242, initial_mean_squared_error: 0.0029085136419846037, num_edges: 300,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH02/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002630906481971165, initial_mean_squared_error: 0.0027367459924674225, num_edges: 246,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH03/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002886080630636662, initial_mean_squared_error: 0.003036370945852451, num_edges: 324,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH03/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0030295069541316695, initial_mean_squared_error: 0.0031448984362287533, num_edges: 276,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH03/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004304738291255697, initial_mean_squared_error: 0.0007921212620377978, num_edges: 236,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002740794701861493, initial_mean_squared_error: 0.0028852842037172272, num_edges: 216,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH03/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0035773323609564396, initial_mean_squared_error: 0.003624304152916916, num_edges: 204,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH03/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002646755538044333, initial_mean_squared_error: 0.0028007939378206477, num_edges: 318,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH04/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005445548732518849, initial_mean_squared_error: 0.0007471994801712124, num_edges: 396,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006104295875871408, initial_mean_squared_error: 0.0008148124173485516, num_edges: 458,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH04/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00047687072150222375, initial_mean_squared_error: 0.0011829536569503193, num_edges: 238,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.000490660413617163, initial_mean_squared_error: 0.0008738690304330759, num_edges: 450,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005923075554609635, initial_mean_squared_error: 0.0007207403609249257, num_edges: 430,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH04/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0007817070930448538, initial_mean_squared_error: 0.0013075516890126268, num_edges: 394,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00046341453447419715, initial_mean_squared_error: 0.0005441436567917418, num_edges: 454,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH04/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00045635786562113923, initial_mean_squared_error: 0.0006191357711413968, num_edges: 368,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00083681584695566, initial_mean_squared_error: 0.000892379402252886, num_edges: 470,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH04/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005479320515530459, initial_mean_squared_error: 0.0010374683110737461, num_edges: 216,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004374519302106128, initial_mean_squared_error: 0.0009360192330661038, num_edges: 238,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0022298684604149833, initial_mean_squared_error: 0.0025531097896138014, num_edges: 336,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH05/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.003008019712447208, initial_mean_squared_error: 0.00311480595436382, num_edges: 402,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0025240561831898446, initial_mean_squared_error: 0.00258510765077434, num_edges: 202,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH05/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0027756895497324623, initial_mean_squared_error: 0.0028400836074341036, num_edges: 432,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002690908941364169, initial_mean_squared_error: 0.0028807915224552455, num_edges: 410,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH05/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002240324845265472, initial_mean_squared_error: 0.0023554953637505123, num_edges: 318,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00234487465520273, initial_mean_squared_error: 0.002569388606265215, num_edges: 228,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH05/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002891538518700148, initial_mean_squared_error: 0.002989283459600696, num_edges: 466,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH05/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0025217618819518835, initial_mean_squared_error: 0.00266231522541992, num_edges: 312,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00039653529596590315, initial_mean_squared_error: 0.0005828682139233676, num_edges: 328,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0018181054704801511, initial_mean_squared_error: 0.0018966134850437397, num_edges: 268,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V101/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0003901447277093832, initial_mean_squared_error: 0.0004738027873040826, num_edges: 648,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V101/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005904936531639709, initial_mean_squared_error: 0.0007555564539956824, num_edges: 544,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V101/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0002542084249174152, initial_mean_squared_error: 0.000417448231954048, num_edges: 492,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V101/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001019510972605628, initial_mean_squared_error: 0.0021325003387980155, num_edges: 436,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00032027081468520796, initial_mean_squared_error: 0.00045361267720192154, num_edges: 748,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V101/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0007657979006211665, initial_mean_squared_error: 0.000976841300072174, num_edges: 676,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V102/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005911580030936889, initial_mean_squared_error: 0.001237323353773525, num_edges: 270,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002779769489681857, initial_mean_squared_error: 0.002821679586240618, num_edges: 364,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V102/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0026916705307963354, initial_mean_squared_error: 0.00274823270430211, num_edges: 216,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V102/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0008178449392285639, initial_mean_squared_error: 0.0014959406226596039, num_edges: 214,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002571610132762874, initial_mean_squared_error: 0.0026051925753457885, num_edges: 254,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V102/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002602425280709263, initial_mean_squared_error: 0.0026494183307963813, num_edges: 334,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V102/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002643318879650229, initial_mean_squared_error: 0.002711090810390028, num_edges: 238,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V103/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0019669633034642177, initial_mean_squared_error: 0.002087838160832158, num_edges: 364,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0018654708530368685, initial_mean_squared_error: 0.0019801304526563504, num_edges: 360,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V103/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0021258759180237457, initial_mean_squared_error: 0.0021939116646035044, num_edges: 372,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V103/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002050488819955147, initial_mean_squared_error: 0.002072827158103694, num_edges: 386,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V103/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001987605477827032, initial_mean_squared_error: 0.0020616091851205485, num_edges: 324,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V103/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001801192268187109, initial_mean_squared_error: 0.0018676394326236517, num_edges: 468,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V201/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010762730568888335, initial_mean_squared_error: 0.0018306009204056594, num_edges: 408,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V201/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010370081990397344, initial_mean_squared_error: 0.0014063211532933826, num_edges: 766,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V201/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00016988928232389996, initial_mean_squared_error: 0.00020323075007522466, num_edges: 448,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001458828217188261, initial_mean_squared_error: 0.0015549427085125155, num_edges: 778,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V201/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0008014278097067729, initial_mean_squared_error: 0.0010343193124860573, num_edges: 298,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/V201/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00033101680240863563, initial_mean_squared_error: 0.0005541183170218127, num_edges: 222,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006438125201625912, initial_mean_squared_error: 0.0009907578963106035, num_edges: 242,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/ORB2/MH202/0/log.txt]: Log file reset.

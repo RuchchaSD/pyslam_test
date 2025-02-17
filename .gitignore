@@ -58,6 +58,6 @@ thirdparty/protoc
 
 logs/*.log
 logs/*
-
+logs*
 .env
 .env.bak
