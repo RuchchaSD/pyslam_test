@@ -103,8 +103,8 @@ if __name__ == "__main__":
         # FeatureTrackerConfigs.ORB,
         # FeatureTrackerConfigs.ORB2,
         # FeatureTrackerConfigs.SHI_TOMASI_ORB,
-        FeatureTrackerConfigs.SHI_TOMASI_FREAK, # this is not tested
         FeatureTrackerConfigs.FAST_ORB,
+        FeatureTrackerConfigs.SHI_TOMASI_FREAK, # this is not tested
         FeatureTrackerConfigs.FAST_FREAK, # this is not tested
         FeatureTrackerConfigs.BRISK,
         FeatureTrackerConfigs.KAZE,
@@ -131,10 +131,12 @@ if __name__ == "__main__":
         FeatureTrackerConfigs.ORB2_BEBLID,
     ]
     
+    base_log_path = 'logs'
+    
     startfrom  = {
-        'ft_type': FeatureTrackerConfigs.FAST_ORB,
-        'dataset_name': 'V101',
-        'iteration_idx': 2
+        'ft_type': FeatureTrackerConfigs.SHI_TOMASI_FREAK,
+        'dataset_name': 'MH02',
+        'iteration_idx': 0
     }
     
     print('Slam System Started')
@@ -185,10 +187,12 @@ if __name__ == "__main__":
                 else:
                     _iteration = True
                 
+                # pass
+                
                 # (a) Override the trajectory filename to reflect feature/dataset/iteration
-                #     e.g. logs/ORB2_BEBLID/MH04/0/trajectory.txt
+                #     e.g. {base_log_path}/ORB2_BEBLID/MH04/0/trajectory.txt
                 # NOTE: We assume config.trajectory_settings is a dict with keys: 'filename', 'save_trajectory', 'format_type'
-                output_dir = f"logs/{feature_tracker_config['detector_type']}_{feature_tracker_config['descriptor_type']}/{dataset_name}/{iteration_idx}"
+                output_dir = f"{base_log_path}/{feature_tracker_config['detector_type']}_{feature_tracker_config['descriptor_type']}/{dataset_name}/{iteration_idx}"
                 os.makedirs(output_dir, exist_ok=True)
                 
                 # Set the log file for this iteration
@@ -423,7 +427,7 @@ if __name__ == "__main__":
             #         txt += f"{ate_result['compared_pose_pairs']},{ate_result['absolute_translational_error']['rmse']},{ate_result['absolute_translational_error']['mean']},{ate_result['absolute_translational_error']['median']},{ate_result['absolute_translational_error']['std']},{ate_result['absolute_translational_error']['min']},{ate_result['absolute_translational_error']['max']},"
             #         txt += f"{rpe_results['compared_pose_pairs']},{rpe_results['translational_error']['rmse']},{rpe_results['translational_error']['mean']},{rpe_results['translational_error']['median']},{rpe_results['translational_error']['std']},{rpe_results['translational_error']['min']},{rpe_results['translational_error']['max']},{rpe_results['rotational_error']['rmse']},{rpe_results['rotational_error']['mean']},{rpe_results['rotational_error']['median']},{rpe_results['rotational_error']['std']},{rpe_results['rotational_error']['min']},{rpe_results['rotational_error']['max']},\n"
                 
-            #     dir = f"logs/{feature_tracker_config['detector_type']}/{dataset_name}/"
+            #     dir = f"{base_log_path}/{feature_tracker_config['detector_type']}/{dataset_name}/"
                 
             #     with open(f"{dir}/results.txt", "w") as f:
             #         f.write(txt)
