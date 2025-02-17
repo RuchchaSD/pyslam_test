@@ -56,7 +56,7 @@ from config_parameters import Parameters
 from rerun_interface import Rerun
 
 import traceback
-
+base_log_path = 'logs_2'
 from utilities.utils_print import GlobalPrinter
 time.sleep(1)
 GlobalPrinter.get_instance().set_log_file("logs/main.log")
@@ -131,8 +131,8 @@ if __name__ == "__main__":
         FeatureTrackerConfigs.ORB2_BEBLID,
     ]
     
-    base_log_path = 'logs'
-    dry_run = False
+    
+    dry_run = False  # if True, the SLAM system will not run, but the loop will still iterate over the feature_configs_to_test
     startfrom  = {
         'ft_type': FeatureTrackerConfigs.SHI_TOMASI_FREAK,
         'dataset_name': 'MH02',
@@ -194,6 +194,12 @@ if __name__ == "__main__":
                 # NOTE: We assume config.trajectory_settings is a dict with keys: 'filename', 'save_trajectory', 'format_type'
                 output_dir = f"{base_log_path}/{feature_tracker_config['detector_type']}_{feature_tracker_config['descriptor_type']}/{dataset_name}/{iteration_idx}"
                 os.makedirs(output_dir, exist_ok=True)
+                
+                finished_txt_path = os.path.join(output_dir, "finished.txt")
+                if os.path.exists(finished_txt_path):
+                    print(f"Iteration {iteration_idx} for {dataset_name} with {feature_tracker_config['detector_type']} already finished. Skipping...")
+                    continue
+                
                 
                 # Set the log file for this iteration
                 GlobalPrinter.get_instance().set_print_to_terminal(False)
@@ -411,10 +417,11 @@ if __name__ == "__main__":
                             break
                             
                     
-                
+                with open(finished_txt_path, "w") as f:
+                    f.write("Done")
                 #cv2.waitKey(0)
                 #cv2.destroyAllWindows()
-                GlobalPrinter.get_instance().set_print_to_terminal(True)
+            GlobalPrinter.get_instance().set_print_to_terminal(True)
 
             
                         
