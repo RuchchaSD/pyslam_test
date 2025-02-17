@@ -1,0 +1,216 @@
+[33m WARNING: cannot import LightGlue from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import DiskFeature2D from feature_disk, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import ALIKED from lightglue, check the file docs/TROUBLESHOOTING.md
+[0m[33m WARNING: cannot import SIFT from lightglue, check the file docs/TROUBLESHOOTING.md
+[0mcannot set lib:  gaussian_splatting
+[33m WARNING: cannot import VolumetricIntegratorGaussianSplatting from volumetric_integrator_gaussian_splatting, check the file docs/TROUBLESHOOTING.md
+[0mimporting pygame
+pygame 2.6.0 (SDL 2.28.4, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+initialising pygame
+[GlobalPrinter] No log file path provided. printing to terminal only.
+FileLogger[logs/main_10.log]: Log file reset.
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH02/0/log_1.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0008214825146386095, initial_mean_squared_error: 0.0012384856252250116, num_edges: 238,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH02/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0008605672500962659, initial_mean_squared_error: 0.0009727419182352938, num_edges: 264,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005787966916192421, initial_mean_squared_error: 0.0006187755613982099, num_edges: 242,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004110553110501519, initial_mean_squared_error: 0.0004293361764190209, num_edges: 246,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH02/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0001816086087246901, initial_mean_squared_error: 0.00023291610795348622, num_edges: 218,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0003678776661576963, initial_mean_squared_error: 0.0006656950296637338, num_edges: 342,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH02/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0011915091969241375, initial_mean_squared_error: 0.0015461188748928294, num_edges: 302,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010895051099482972, initial_mean_squared_error: 0.0012514520460831344, num_edges: 240,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH02/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.000533447642517294, initial_mean_squared_error: 0.0005537664548506546, num_edges: 240,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: MH03 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH03/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002793023613557765, initial_mean_squared_error: 0.002931711349854353, num_edges: 266,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH03/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004542844217764554, initial_mean_squared_error: 0.0009248085880665642, num_edges: 226,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH03/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0008704395037219127, initial_mean_squared_error: 0.0008982896293631464, num_edges: 294,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0014453252189464982, initial_mean_squared_error: 0.001523663527959882, num_edges: 282,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00025448274871808476, initial_mean_squared_error: 0.0003535612120956552, num_edges: 308,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH03/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0009731991526560459, initial_mean_squared_error: 0.001255701960554923, num_edges: 270,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0001254264509990647, initial_mean_squared_error: 0.00016776954731480607, num_edges: 214,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH03/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001096968334506685, initial_mean_squared_error: 0.0012237530286227758, num_edges: 270,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: MH04 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH04/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.000625976356157678, initial_mean_squared_error: 0.0006826185623048215, num_edges: 222,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH04/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005077196294836684, initial_mean_squared_error: 0.0006702330980186545, num_edges: 230,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0002751976277109402, initial_mean_squared_error: 0.0008136002851104247, num_edges: 222,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002094857106070376, initial_mean_squared_error: 0.0023327451688609346, num_edges: 236,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH04/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010769560555041946, initial_mean_squared_error: 0.0018488406107196528, num_edges: 250,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH04/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0003912948756731305, initial_mean_squared_error: 0.0004827037026952531, num_edges: 228,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH04/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.003156382291280278, initial_mean_squared_error: 0.0032303017183898833, num_edges: 228,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: MH05 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH05/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006725138794907735, initial_mean_squared_error: 0.0007951316931933461, num_edges: 358,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0007509382956336734, initial_mean_squared_error: 0.000999281133837703, num_edges: 224,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002463803608745421, initial_mean_squared_error: 0.0025500001102401167, num_edges: 350,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH05/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004253258009510789, initial_mean_squared_error: 0.000589840547441951, num_edges: 350,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0014359164768022801, initial_mean_squared_error: 0.0015838159533411668, num_edges: 254,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002905917592733658, initial_mean_squared_error: 0.003081390759716507, num_edges: 226,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH05/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0004983763108946813, initial_mean_squared_error: 0.0005847025119338453, num_edges: 346,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0010866379600525445, initial_mean_squared_error: 0.0011485080620988175, num_edges: 210,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.002416487084895806, initial_mean_squared_error: 0.002539729210074355, num_edges: 218,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH05/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006825000863008259, initial_mean_squared_error: 0.0007787464129661027, num_edges: 214,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0013566735649308626, initial_mean_squared_error: 0.0014153042694943364, num_edges: 298,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH05/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0005114187075052193, initial_mean_squared_error: 0.0006328409608871281, num_edges: 354,  num_bad_edges: 0 (perc: 0.00%)
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0025299455719752636, initial_mean_squared_error: 0.0025945685110568173, num_edges: 248,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: V101 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V101/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006380143668205722, initial_mean_squared_error: 0.0009227268458658682, num_edges: 440,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V101/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001079531798860118, initial_mean_squared_error: 0.0015666622187396838, num_edges: 488,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V101/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0009150319499436767, initial_mean_squared_error: 0.001123646054453819, num_edges: 312,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V101/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0002857271878459518, initial_mean_squared_error: 0.0004960769862229588, num_edges: 294,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V101/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.001022116748769883, initial_mean_squared_error: 0.001803217609320998, num_edges: 458,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: V102 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V102/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0035513788383797823, initial_mean_squared_error: 0.0038866178658566583, num_edges: 220,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V102/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0006622918315053013, initial_mean_squared_error: 0.0009709621855234459, num_edges: 204,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V102/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0024622106179494818, initial_mean_squared_error: 0.0026508282606413423, num_edges: 302,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V102/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0024402537371540673, initial_mean_squared_error: 0.0024953696222819116, num_edges: 244,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V102/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0002697673617794134, initial_mean_squared_error: 0.0004927571984911408, num_edges: 208,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: V103 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V103/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.003567267976986979, initial_mean_squared_error: 0.004000865672214886, num_edges: 394,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V103/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0030402517527615097, initial_mean_squared_error: 0.0032817264480606107, num_edges: 388,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V103/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0016215080093572194, initial_mean_squared_error: 0.0023360412737569477, num_edges: 464,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V103/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0029464330909039693, initial_mean_squared_error: 0.00307682888648383, num_edges: 250,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V103/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.003013892580418615, initial_mean_squared_error: 0.0033231562110417807, num_edges: 426,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: V201 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V201/0/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.003282576867206954, initial_mean_squared_error: 0.0034405241788297114, num_edges: 416,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V201/1/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0032395168182686434, initial_mean_squared_error: 0.0032899483167500637, num_edges: 472,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V201/2/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0028664033706360366, initial_mean_squared_error: 0.003157262931759328, num_edges: 442,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V201/3/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.00163197554055644, initial_mean_squared_error: 0.0016680131767558858, num_edges: 444,  num_bad_edges: 0 (perc: 0.00%)
+File Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/V201/4/log.txt]: Log file reset.
+bundle_adjustment: rounds: 20, robust_rounds: 10, final_rounds: 10
+bundle_adjustment: mean_squared_error: 0.0016267210334258721, initial_mean_squared_error: 0.0016631140111967888, num_edges: 444,  num_bad_edges: 0 (perc: 0.00%)
+[32m Running SLAM on dataset: MH202 with feature config: SHI_TOMASI
+[0mFile Logger is Not there
+FileLogger[logs/SHI_TOMASI_FREAK/MH202/0/log.txt]: Log file reset.

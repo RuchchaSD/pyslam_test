@@ -132,7 +132,7 @@ if __name__ == "__main__":
     ]
     
     base_log_path = 'logs'
-    
+    dry_run = False
     startfrom  = {
         'ft_type': FeatureTrackerConfigs.SHI_TOMASI_FREAK,
         'dataset_name': 'MH02',
@@ -245,171 +245,172 @@ if __name__ == "__main__":
                                                             dataset_env_type=dataset.environmentType(), camera=camera) 
                     Printer.green(f'Depth_estimator_type: {depth_estimator_type.name}, max_depth: {max_depth}')       
                 
-                # create SLAM object
-                slam = Slam(camera, feature_tracker_config, loop_detection_config, dataset.sensorType(), environment_type=dataset.environmentType()) # groundtruth not actually used by Slam class
-                slam.set_viewer_scale(dataset.scale_viewer_3d)
-                time.sleep(1) # to show initial messages 
-    
-                # load system state if requested         
-                if config.system_state_load: 
-                    slam.load_system_state(config.system_state_folder_path)
-                    viewer_scale = slam.viewer_scale() if slam.viewer_scale()>0 else 0.1  # 0.1 is the default viewer scale
-                    print(f'viewer_scale: {viewer_scale}')
-                    slam.set_tracking_state(SlamState.INIT_RELOCALIZE)
+                if not dry_run:
+                    # create SLAM object
+                    slam = Slam(camera, feature_tracker_config, loop_detection_config, dataset.sensorType(), environment_type=dataset.environmentType()) # groundtruth not actually used by Slam class
+                    slam.set_viewer_scale(dataset.scale_viewer_3d)
+                    time.sleep(1) # to show initial messages 
+        
+                    # load system state if requested         
+                    if config.system_state_load: 
+                        slam.load_system_state(config.system_state_folder_path)
+                        viewer_scale = slam.viewer_scale() if slam.viewer_scale()>0 else 0.1  # 0.1 is the default viewer scale
+                        print(f'viewer_scale: {viewer_scale}')
+                        slam.set_tracking_state(SlamState.INIT_RELOCALIZE)
 
-                viewer3D = Viewer3D(scale=dataset.scale_viewer_3d)
-                if groundtruth is not None:
-                    gt_traj3d, gt_timestamps = groundtruth.getFull3dTrajectory()
-                    if viewer3D is not None:
-                        viewer3D.set_gt_trajectory(gt_traj3d, gt_timestamps, align_with_scale=dataset.sensor_type==SensorType.MONOCULAR)
-    
-                if platform.system() == 'Linux':    
-                    display2d = Display2D(camera.width, camera.height)  # pygame interface 
-                else: 
-                    display2d = None  # enable this if you want to use opencv window
+                    viewer3D = Viewer3D(scale=dataset.scale_viewer_3d)
+                    if groundtruth is not None:
+                        gt_traj3d, gt_timestamps = groundtruth.getFull3dTrajectory()
+                        if viewer3D is not None:
+                            viewer3D.set_gt_trajectory(gt_traj3d, gt_timestamps, align_with_scale=dataset.sensor_type==SensorType.MONOCULAR)
+        
+                    if platform.system() == 'Linux':    
+                        display2d = Display2D(camera.width, camera.height)  # pygame interface 
+                    else: 
+                        display2d = None  # enable this if you want to use opencv window
 
-                plot_drawer = SlamPlotDrawer(slam, viewer3D,output_dir)
-    
-                img_writer = ImgWriter(font_scale=0.7)
+                    plot_drawer = SlamPlotDrawer(slam, viewer3D,output_dir)
+        
+                    img_writer = ImgWriter(font_scale=0.7)
 
-                do_step = False      # proceed step by step on GUI 
-                do_reset = False     # reset on GUI 
-                is_paused = False    # pause/resume on GUI 
-                is_map_save = False  # save map on GUI
-                
-                key_cv = None
-                        
-                img_id = 0  #180, 340, 400   # you can start from a desired frame id if needed 
-                
-                
-                time_to_stop = 0 
-                max_time = 5 #max time to wait for new images else loop will break
-                while True:
+                    do_step = False      # proceed step by step on GUI 
+                    do_reset = False     # reset on GUI 
+                    is_paused = False    # pause/resume on GUI 
+                    is_map_save = False  # save map on GUI
                     
-                    img, img_right, depth = None, None, None    
-                    
-                    if do_step:
-                        Printer.orange('do step: ', do_step)
-                        
-                    if do_reset: 
-                        Printer.yellow('do reset: ', do_reset)
-                        slam.reset()
-                        
-                    if not is_paused or do_step:
-                    
-                        if dataset.isOk():
-                            print('..................................')               
-                            img = dataset.getImageColor(img_id)
-                            depth = dataset.getDepth(img_id)
-                            img_right = dataset.getImageColorRight(img_id) if dataset.sensor_type == SensorType.STEREO else None
-                        
-                        if img is not None:
-                            timestamp = dataset.getTimestamp()          # get current timestamp 
-                            next_timestamp = dataset.getNextTimestamp() # get next timestamp 
-                            frame_duration = next_timestamp-timestamp if (timestamp is not None and next_timestamp is not None) else -1
-
-                            print(f'image: {img_id}, timestamp: {timestamp}, duration: {frame_duration}') 
+                    key_cv = None
                             
-                            time_start = None 
+                    img_id = 0  #180, 340, 400   # you can start from a desired frame id if needed 
+                    
+                    
+                    time_to_stop = 0 
+                    max_time = 5 #max time to wait for new images else loop will break
+                    while True:
+                        
+                        img, img_right, depth = None, None, None    
+                        
+                        if do_step:
+                            Printer.orange('do step: ', do_step)
+                            
+                        if do_reset: 
+                            Printer.yellow('do reset: ', do_reset)
+                            slam.reset()
+                            
+                        if not is_paused or do_step:
+                        
+                            if dataset.isOk():
+                                print('..................................')               
+                                img = dataset.getImageColor(img_id)
+                                depth = dataset.getDepth(img_id)
+                                img_right = dataset.getImageColorRight(img_id) if dataset.sensor_type == SensorType.STEREO else None
+                            
                             if img is not None:
-                                time_start = time.time()    
+                                timestamp = dataset.getTimestamp()          # get current timestamp 
+                                next_timestamp = dataset.getNextTimestamp() # get next timestamp 
+                                frame_duration = next_timestamp-timestamp if (timestamp is not None and next_timestamp is not None) else -1
+
+                                print(f'image: {img_id}, timestamp: {timestamp}, duration: {frame_duration}') 
                                 
-                                if depth is None and depth_estimator is not None:
-                                    depth_prediction = depth_estimator.infer(img, img_right)
-                                    if Parameters.kDepthEstimatorRemoveShadowPointsInFrontEnd:
-                                        depth = filter_shadow_points(depth_prediction)
+                                time_start = None 
+                                if img is not None:
+                                    time_start = time.time()    
+                                    
+                                    if depth is None and depth_estimator is not None:
+                                        depth_prediction = depth_estimator.infer(img, img_right)
+                                        if Parameters.kDepthEstimatorRemoveShadowPointsInFrontEnd:
+                                            depth = filter_shadow_points(depth_prediction)
+                                        else: 
+                                            depth = depth_prediction
+                                        depth_img = img_from_depth(depth_prediction, img_min=0, img_max=50)
+                                        cv2.imshow("depth prediction", depth_img)
+                                        
+                                    try:        
+                                        slam.track(img, img_right, depth, img_id, timestamp)  # main SLAM function 
+                                        
+                                    except Exception as e:
+                                        Printer.error('Error in SLAM track()')
+                                        print(traceback.format_exc())
+                                        cv2.imwrite(os.path.join(output_dir, f"{img_id}_err_image.png"), img)
+                                        initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir)
+                                        plot_drawer = None
+                                        break
+                                                    
+                                    # 3D display (map display)
+                                    if viewer3D is not None:
+                                        viewer3D.draw_map(slam)
+
+                                    img_draw = slam.map.draw_feature_trails(img)
+                                    img_writer.write(img_draw, f'id: {img_id}', (30, 30))
+                                    
+                                    # 2D display (image display)
+                                    if display2d is not None:
+                                        display2d.draw(img_draw)
                                     else: 
-                                        depth = depth_prediction
-                                    depth_img = img_from_depth(depth_prediction, img_min=0, img_max=50)
-                                    cv2.imshow("depth prediction", depth_img)
+                                        cv2.imshow('Camera', img_draw)
                                     
-                                try:        
-                                    slam.track(img, img_right, depth, img_id, timestamp)  # main SLAM function 
+                                    # draw 2d plots
+                                    plot_drawer.draw(img_id)
+                                        
+                                if trajectory_writer is not None and slam.tracking.cur_R is not None and slam.tracking.cur_t is not None:
+                                    trajectory_writer.write_trajectory(slam.tracking.cur_R, slam.tracking.cur_t, timestamp)
                                     
-                                except Exception as e:
-                                    Printer.error('Error in SLAM track()')
-                                    print(traceback.format_exc())
-                                    cv2.imwrite(os.path.join(output_dir, f"{img_id}_err_image.png"), img)
-                                    initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir)
+                                if time_start is not None: 
+                                    duration = time.time()-time_start
+                                    if(frame_duration > duration):
+                                        time.sleep(frame_duration-duration) 
+                                    
+                                img_id += 1 
+                            else: 
+                                time.sleep(0.1)
+                                time_to_stop += 0.1
+                                if time_to_stop > max_time:
+                                    time_to_stop = 0
+                                    initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir) 
                                     plot_drawer = None
                                     break
-                                                
-                                # 3D display (map display)
-                                if viewer3D is not None:
-                                    viewer3D.draw_map(slam)
-
-                                img_draw = slam.map.draw_feature_trails(img)
-                                img_writer.write(img_draw, f'id: {img_id}', (30, 30))
                                 
-                                # 2D display (image display)
-                                if display2d is not None:
-                                    display2d.draw(img_draw)
-                                else: 
-                                    cv2.imshow('Camera', img_draw)
-                                
-                                # draw 2d plots
-                                plot_drawer.draw(img_id)
-                                    
-                            if trajectory_writer is not None and slam.tracking.cur_R is not None and slam.tracking.cur_t is not None:
-                                trajectory_writer.write_trajectory(slam.tracking.cur_R, slam.tracking.cur_t, timestamp)
-                                
-                            if time_start is not None: 
-                                duration = time.time()-time_start
-                                if(frame_duration > duration):
-                                    time.sleep(frame_duration-duration) 
-                                
-                            img_id += 1 
-                        else: 
-                            time.sleep(0.1)
-                            time_to_stop += 0.1
-                            if time_to_stop > max_time:
-                                time_to_stop = 0
-                                initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir) 
-                                plot_drawer = None
-                                break
-                            
-                        # 3D display (map display)
-                        if viewer3D is not None:
-                            viewer3D.draw_dense_map(slam)  
-                                        
-                    else:
-                        time.sleep(0.1)                                 
-                    
-                    # get keys 
-                    key = plot_drawer.get_key()
-                    if display2d is None:
-                        key_cv = cv2.waitKey(1) & 0xFF   
-                        
-                    # if key != '' and key is not None:
-                    #     print(f'key pressed: {key}') 
-                    
-                    # manage interface infos  
-                    
-                    if slam.tracking.state==SlamState.LOST:
-                        if display2d is None:  
-                            #key_cv = cv2.waitKey(0) & 0xFF   # useful when drawing stuff for debugging
-                            key_cv = cv2.waitKey(500) & 0xFF                                 
-                        else: 
-                            #getchar()
-                            time.sleep(0.5)
-                            
-                    if is_map_save:
-                        slam.save_system_state(config.system_state_folder_path)
-                        dataset.save_info(config.system_state_folder_path)
-                        Printer.green('uncheck pause checkbox on GUI to continue...\n')        
-                    
-                    if viewer3D is not None:
-                        is_paused = viewer3D.is_paused()    
-                        is_map_save = viewer3D.is_map_save() and is_map_save == False 
-                        do_step = viewer3D.do_step() and do_step == False  
-                        do_reset = viewer3D.reset() and do_reset == False  
+                            # 3D display (map display)
+                            if viewer3D is not None:
+                                viewer3D.draw_dense_map(slam)  
                                             
-                    if key == 'q' or (key_cv == ord('q')):
-                        initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir)
-                        plot_drawer = None
-                        break
+                        else:
+                            time.sleep(0.1)                                 
                         
-                
+                        # get keys 
+                        key = plot_drawer.get_key()
+                        if display2d is None:
+                            key_cv = cv2.waitKey(1) & 0xFF   
+                            
+                        # if key != '' and key is not None:
+                        #     print(f'key pressed: {key}') 
+                        
+                        # manage interface infos  
+                        
+                        if slam.tracking.state==SlamState.LOST:
+                            if display2d is None:  
+                                #key_cv = cv2.waitKey(0) & 0xFF   # useful when drawing stuff for debugging
+                                key_cv = cv2.waitKey(500) & 0xFF                                 
+                            else: 
+                                #getchar()
+                                time.sleep(0.5)
+                                
+                        if is_map_save:
+                            slam.save_system_state(config.system_state_folder_path)
+                            dataset.save_info(config.system_state_folder_path)
+                            Printer.green('uncheck pause checkbox on GUI to continue...\n')        
+                        
+                        if viewer3D is not None:
+                            is_paused = viewer3D.is_paused()    
+                            is_map_save = viewer3D.is_map_save() and is_map_save == False 
+                            do_step = viewer3D.do_step() and do_step == False  
+                            do_reset = viewer3D.reset() and do_reset == False  
+                                                
+                        if key == 'q' or (key_cv == ord('q')):
+                            initiate_quit(slam, plot_drawer, display2d, viewer3D, trajectory_writer, output_dir)
+                            plot_drawer = None
+                            break
+                            
+                    
                 
                 #cv2.waitKey(0)
                 #cv2.destroyAllWindows()
